@@ -1,0 +1,19 @@
+{
+  "name": "rating-service",
+  "version": "1.0.0",
+  "description": "This is a Microservice for rating written in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Amrit",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "eureka-js-client": "^4.5.0",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
+  }
+}
