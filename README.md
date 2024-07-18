@@ -1,6 +1,6 @@
 # Hotel Rating Service
 
-This is a microservice architecture application designed for a hotel rating service. The application comprises three distinct services: Hotel, User, and Rating. Each of these services is registered with a Eureka service registry, facilitating service discovery and management.
+This is a microservice architecture application designed for a hotel rating service. The application comprises several distinct services: Hotel, User, Rating, API Gateway, and Config Server. Each of these services is registered with a Eureka service registry, facilitating service discovery and management.
 
 ## Services
 
@@ -19,6 +19,14 @@ This is a microservice architecture application designed for a hotel rating serv
 - **Database**: MongoDB
 - **Description**: Manages hotel ratings and reviews submitted by users.
 
+### API Gateway
+- **Technology**: Spring Cloud Gateway
+- **Description**: Provides a single entry point for all client requests, routing them to the appropriate service.
+
+### Config Server
+- **Technology**: Spring Cloud Config
+- **Description**: Manages external configuration for applications across all environments.
+
 ## Service Registry
 
 ### Eureka Service Registry
@@ -34,4 +42,3 @@ This is a microservice architecture application designed for a hotel rating serv
 - MongoDB
 - Maven
 - npm or yarn
-
