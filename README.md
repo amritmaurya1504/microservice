@@ -15,7 +15,7 @@ This is a microservice architecture application designed for a hotel rating serv
 - **Description**: Handles user data, including registration, authentication, and user profiles.
 
 ### Rating Service
-- **Technology**: Node.js
+- **Technology**: Spring Boot
 - **Database**: MongoDB
 - **Description**: Manages hotel ratings and reviews submitted by users.
 

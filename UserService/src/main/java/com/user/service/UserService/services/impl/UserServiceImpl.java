@@ -4,6 +4,7 @@ import com.user.service.UserService.entities.Hotel;
 import com.user.service.UserService.entities.Rating;
 import com.user.service.UserService.entities.User;
 import com.user.service.UserService.exceptions.ResourceNotFoundException;
+import com.user.service.UserService.external.services.HotelService;
 import com.user.service.UserService.repositories.UserRepo;
 import com.user.service.UserService.services.UserServices;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserServices {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HotelService hotelService;
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -52,16 +56,16 @@ public class UserServiceImpl implements UserServices {
         // fetch rating of the above user from rating service
         // url: http://localhost:8083/ratings/user/c806f39c-65da-41a0-974d-b829adb9023f
         Rating[] ratingsOfUser = restTemplate.getForObject(
-                "http://localhost:8083/ratings/user/"+userId,
+                "http://RATING-SERVICE/ratings/users/"+userId,
                 Rating[].class);
 
         List<Rating> ratings = Arrays.stream(ratingsOfUser).toList();
         // fetch hotel details
         List<Rating> ratingList = ratings.stream().map(rating -> {
             // api call to hotel service to get the hotel
-            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity(
-                    "http://localhost:8082/hotels/"+rating.getHotelId(), Hotel.class);
-            Hotel body = forEntity.getBody();
+//            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity(
+//                    "http://localhost:8082/hotels/"+rating.getHotelId(), Hotel.class);
+            Hotel body = hotelService.gethotel(rating.getHotelId());
             rating.setHotel(body);
             // set the hotel to rating
              return rating;
