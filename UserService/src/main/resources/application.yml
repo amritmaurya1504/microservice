@@ -16,3 +16,37 @@ spring:
 
   application:
     name: USER-SERVICE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+  ratelimiter:
+    instances:
+      userRateLimiter:
+        limit-refresh-period: 4s
+        limit-for-period: 2
+        timeout-duration: 2s
+
